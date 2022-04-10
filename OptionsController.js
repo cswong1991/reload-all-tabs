@@ -23,13 +23,15 @@ class OptionsController {
         let exclude_audible = document.getElementById('exclude_audible').checked;
         let exclude_urls = document.getElementById('exclude_urls').value;
 
-        if (this.validateSave(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls)) {
-            this.save(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls);
-        }
-        document.getElementById('msg').innerHTML = JSON.stringify(this.errors);
+        this.validateSave(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls).then(validateResult => {
+            if (validateResult) {
+                this.save(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls);
+            }
+            document.getElementById('msg').innerHTML = JSON.stringify(this.errors);
+        });
     }
 
-    validateSave(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls) {
+    async validateSave(target_windows, target_tabs, bypass_cache, exclude_audible, exclude_urls) {
         this.errors = {};
         if (!['all_windows', 'this_window'].includes(target_windows)) {
             this.errors['target_windows'] = 'Invalid target_windows';
@@ -45,10 +47,18 @@ class OptionsController {
         }
         // Must be an array with min length of 1
         let urls_inArr = exclude_urls.split('\n');
-        if (exclude_urls.length > 0 && urls_inArr.some(e1 => e1.trim() === '')) {
-            this.errors['exclude_urls'] = 'Contain empty lines'
-        } else if (new Set(urls_inArr).size !== urls_inArr.length) {
-            this.errors['exclude_urls'] = 'Contain identical urls or domains'
+        if (exclude_urls.length > 0) {
+            if (urls_inArr.some(e1 => e1.trim() === '')) {
+                this.errors['exclude_urls'] = 'Contain empty lines';
+            } else if (new Set(urls_inArr).size !== urls_inArr.length) {
+                this.errors['exclude_urls'] = 'Contain identical urls or domains';
+            } else {
+                try {
+                    await chrome.tabs.query({ url: urls_inArr });
+                } catch {
+                    this.errors['exclude_urls'] = 'Invalid URLs';
+                }
+            }
         }
         return Object.keys(this.errors).length === 0;
     }

@@ -2,14 +2,14 @@ chrome.runtime.onInstalled.addListener(function () {
     loadSettings(createContextmenus);
 });
 
-chrome.action.onClicked.addListener(function (tab) {
-    loadSettings(requestReload);
-});
-
 chrome.storage.onChanged.addListener(function (changes, areaName) {
     if (changes['bypass_cache'] || changes['exclude_audible']) {
         loadSettings(createContextmenus);
     }
+});
+
+chrome.action.onClicked.addListener(function (tab) {
+    loadSettings(requestReload);
 });
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
@@ -31,7 +31,6 @@ function loadSettings(callback) {
         settings['bypass_cache'] = settings['bypass_cache'] ?? false;
         settings['exclude_audible'] = settings['exclude_audible'] ?? false;
         settings['exclude_urls'] = settings['exclude_urls'] ?? [];
-        console.log(settings);
         if (callback) {
             callback(settings);
         }
