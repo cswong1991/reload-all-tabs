@@ -43,28 +43,24 @@ function createContextmenus(settings) {
             id: 'all_windows',
             title: 'Reload All Windows',
             type: 'normal',
-            checked: settings['target_windows'] === 'all_windows',
             contexts: ['action']
         }
         let this_window = {
             id: 'this_window',
             title: 'Reload This Window',
             type: 'normal',
-            checked: settings['target_windows'] === 'this_window',
             contexts: ['action']
         }
         let pinned_tabs = {
             id: 'pinned_tabs',
             title: 'Reload Pinned Tabs',
             type: 'normal',
-            checked: settings['target_tabs'] === 'pinned_tabs',
             contexts: ['action']
         }
         let unpinned_tabs = {
             id: 'unpinned_tabs',
             title: 'Reload Unpinned Tabs',
             type: 'normal',
-            checked: settings['target_tabs'] === 'unpinned_tabs',
             contexts: ['action']
         }
         let bypass_cache = {

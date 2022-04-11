@@ -45,9 +45,10 @@ class OptionsController {
         if (typeof exclude_audible !== 'boolean') {
             this.errors['exclude_audible'] = 'Invalid exclude_audible';
         }
-        // Must be an array with min length of 1
-        let urls_inArr = exclude_urls.split('\n');
+
         if (exclude_urls.length > 0) {
+            // Must be an array with min length of 1, ''.split('\n') = ['']
+            let urls_inArr = exclude_urls.split('\n');
             if (urls_inArr.some(e1 => e1.trim() === '')) {
                 this.errors['exclude_urls'] = 'Contain empty lines';
             } else if (new Set(urls_inArr).size !== urls_inArr.length) {
@@ -56,7 +57,7 @@ class OptionsController {
                 try {
                     await chrome.tabs.query({ url: urls_inArr });
                 } catch {
-                    this.errors['exclude_urls'] = 'Invalid URLs';
+                    this.errors['exclude_urls'] = 'Invalid urls';
                 }
             }
         }
