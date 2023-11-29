@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>options_ui</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <form id="form" class="m-2">
+    <div class="border p-3">
+      <div>Include Windows</div>
+      <div class="form-check">
+        <input type="radio" id="all_windows" class="form-check-input" name="include_windows" />
+        <label class="form-check-label" for="all_windows">All Windows</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" id="this_window" class="form-check-input" name="include_windows" />
+        <label class="form-check-label" for="this_window">This Window</label>
+      </div>
+    </div>
+    <br />
+
+    <div class="border p-3">
+      <div>Include Tabs</div>
+      <div class="form-check">
+        <input type="radio" id="all_tabs" class="form-check-input" name="include_tabs" />
+        <label class="form-check-label" for="all_tabs">All Tabs</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" id="pinned_tabs" class="form-check-input" name="include_tabs" />
+        <label class="form-check-label" for="pinned_tabs">Pinned Tabs</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" id="unpinned_tabs" class="form-check-input" name="include_tabs" />
+        <label class="form-check-label" for="unpinned_tabs">Unpinned Tabs</label>
+      </div>
+    </div>
+    <br />
+
+    <div class="border p-3">
+      <div>Other Options</div>
+      <div class="form-check">
+        <input type="checkbox" id="bypass_cache" class="form-check-input" />
+        <label class="form-check-label" for="bypass_cache">Bypass Cache</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="exclude_audible_tabs" class="form-check-input" />
+        <label class="form-check-label" for="exclude_audible">Exclude Audible Tabs</label><br />
+      </div>
+    </div>
+    <br />
+
+    <div>
+      <input type="submit" value="Save" />
+      <input type="button" id="close" value="Close" />
+      <input type="button" id="load_default" value="Load Default" />
+    </div>
+  </form>
+</body>
+
+</html>
