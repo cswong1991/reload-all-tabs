@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BehaviorSubject, from, fromEvent, switchMap } from "rxjs";
 import { getConfig } from "../common";
 
-const form = document.getElementById("form") as HTMLElement;
+const form = document.getElementById("form") as HTMLFormElement;
 
 const include_windows = document.getElementsByName(
     "include_windows",
@@ -17,8 +17,8 @@ const exclude_audible_tabs = document.getElementById(
     "exclude_audible_tabs",
 ) as HTMLInputElement;
 
-const close = document.getElementById("close") as HTMLElement;
-const load_default = document.getElementById("load_default") as HTMLElement;
+const close = document.getElementById("close") as HTMLInputElement;
+const load_default = document.getElementById("load_default") as HTMLInputElement;
 
 const renderEvent = new BehaviorSubject<boolean>(false);
 
